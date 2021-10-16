@@ -1,0 +1,4 @@
+.vscode
+config.json
+node_modules
+ffmpeg
