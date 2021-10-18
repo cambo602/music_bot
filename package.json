@@ -1,0 +1,23 @@
+{
+  "name": "music_bot",
+  "version": "1.0.1",
+  "description": "Discord bot that plays white people banggers",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^13.2.0",
+    "ytdl": "^1.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akaowen7/music_bot.git"
+  },
+  "author": "cambo602, akaowen7",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akaowen7/music_bot/issues"
+  },
+  "homepage": "https://github.com/akaowen7/music_bot#readme"
+}

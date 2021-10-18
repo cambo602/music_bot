@@ -1,12 +1,34 @@
 const Discord = require("discord.js");
 const { prefix, token } = require("./config.json");
 const ytdl = require("ytdl-core");
+const fs = require("fs")
 
-const client = new Discord.Client();
+// Discord Has an new thing with intents, Not really sire how it works,
+// but if you're unable to get information its probaly because when the 
+// client is made it does not say it wants that informantion
+const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS] })
 
+// Init the queue
 const queue = new Map();
 
-client.once("ready", () => {
+// Making a multifile command handler.
+// Discord.Collection() is basicaly just a cooller map, and attaching it
+// to client with our new object commands lets us access it from anywhere
+// in the music_bot folder.
+client.commands = new Discord.Collection();
+
+const commandFileNames = fs.readdirSync("./commands/").filter(file => file.endsWith(".js"));
+
+// adds the commands to the collection
+for (const file of commandFileNames){
+  const command = require(`./commands/${file}`);
+
+  client.commands.set(command.name, command);
+}
+// ---
+
+// Debug stuff
+client.once("ready", () => { 
   console.log("Ready!");
 });
 
@@ -17,28 +39,26 @@ client.once("reconnecting", () => {
 client.once("disconnect", () => {
   console.log("Disconnect!");
 });
+// ---
 
-client.on("message", async message => {
+//Decides where all the messages will go, depending on the command
+client.on("message", message => {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
 
   const serverQueue = queue.get(message.guild.id);
 
-  if (message.content.startsWith(`${prefix}play`) || message.content.startsWith(`${prefix}p`)) {
+  let command = c => message.content.toLowerCase().startsWith(`${prefix}${c}`)
+
+  if (command("play") || command("p")) 
     execute(message, serverQueue);
-    return;
-  } else if (message.content.startsWith(`${prefix}skip`)) {
+  else if (command("skip")) 
     skip(message, serverQueue);
-    return;
-  } else if (message.content.startsWith(`${prefix}stop`)) {
+  else if (command("stop")) 
     stop(message, serverQueue);
-    return;
-  } else if (message.content.startsWith(`${prefix}queue`)) {
+  else if (command("queue")) 
     display(message, serverQueue);
-    return;
-  } else {
-    message.channel.send("You need to enter a valid command!");
-  }
+  else message.channel.send("You need to enter a valid command!");
 });
 
 async function execute(message, serverQueue) {
