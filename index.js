@@ -1,12 +1,17 @@
 const Discord = require("discord.js");
 const { prefix, token } = require("./config.json");
 const ytdl = require("ytdl-core");
-const fs = require("fs")
+const fs = require("fs");
+const { debug } = require("console");
 
 // Discord Has an new thing with intents, Not really sire how it works,
 // but if you're unable to get information its probaly because when the 
 // client is made it does not say it wants that informantion
-const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS] })
+const neededIntents = new Discord.Intents().add(
+  Discord.Intents.FLAGS.GUILDS,
+  Discord.Intents.FLAGS.GUILD_VOICE_STATES,
+  Discord.Intents.FLAGS.GUILD_MESSAGES);
+const client = new Discord.Client({ intents: neededIntents })
 
 // Init the queue
 const queue = new Map();
@@ -43,15 +48,18 @@ client.once("disconnect", () => {
 
 //Decides where all the messages will go, depending on the command
 client.on("message", message => {
+  // console.log(message);
+
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
 
   const serverQueue = queue.get(message.guild.id);
 
-  let command = c => message.content.toLowerCase().startsWith(`${prefix}${c}`)
-
+  let command = c => message.content.toLowerCase().startsWith(`${prefix}${c}`);
+  var result = null;
+  
   if (command("play") || command("p")) 
-    execute(message, serverQueue);
+    result = client.commands.get("execute").execute(message, serverQueue, queue, client);
   else if (command("skip")) 
     skip(message, serverQueue);
   else if (command("stop")) 
@@ -59,6 +67,11 @@ client.on("message", message => {
   else if (command("queue")) 
     display(message, serverQueue);
   else message.channel.send("You need to enter a valid command!");
+
+  if (result[0] == "Respond"){
+    console.log("No")
+    return message.channel.send(result[1])
+  }
 });
 
 async function execute(message, serverQueue) {
@@ -134,6 +147,7 @@ function stop(message, serverQueue) {
   serverQueue.songs = [];
   serverQueue.connection.dispatcher.end();
 }
+
 function display(message, serverQueue){
     if(!serverQueue){
         return message.channel.send("There are no song in the queue!");
@@ -147,6 +161,7 @@ function display(message, serverQueue){
         }
 }
 }
+
 function play(guild, song) {
   const serverQueue = queue.get(guild.id);
   if (!song) {

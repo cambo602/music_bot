@@ -4,7 +4,10 @@
   "description": "Discord bot that plays white people banggers",
   "main": "index.js",
   "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "@discordjs/voice": "^0.6.0",
     "discord.js": "^13.2.0",
+    "libsodium-wrappers": "^0.7.9",
     "ytdl": "^1.4.1"
   },
   "scripts": {
