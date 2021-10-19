@@ -1,6 +1,6 @@
 # White People Bangers
  
-It's a bot that plays ~~music~~ white people bangers. Uses `discord.js`, `discord.js/voice`, `ytdl`, and `FFmpeg`
+It's a bot that plays ~~music~~ white people bangers. Uses `discord.js`, `discord.js/voice`, `ytdl`, `discord-youtube-api`, and `FFmpeg`
 
 # Issues
 
@@ -27,6 +27,7 @@ The bots token and prefix are stored in a file called `config.js` located in mai
     {
         "token": "YOUR_TOKEN_HERE",
         "prefix": "YOUR_PREFIX_HERE"
+        "key": "YOUR-YOUTUBE-API-KEY-HERE"
     }
 
 And then fill in the values for your bot's prefix and the [bots token](https://discord.com/developers/applications)
@@ -44,6 +45,7 @@ Run the bot with this command (in the bots directiory):
 - ok I added a player property to the queueContruct I swear they are diffrent
 
 ## Version changes 
+- V2.1.0 - Added video search feature, bot can now play music through url, and plain text searching
 - v2.0.0 - realized I shoude have changed the version to 2.x.x a while ago, added some embeds, all functions work, commented everywhere
 - v1.2.0 - Reverted to node v14 for real this time. There is now a new entry point: `musicbot.congif.js`.
 - v1.0.2 - bot functions
