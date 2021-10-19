@@ -1,14 +1,15 @@
 const Discord = require("../node_modules/discord.js");
+const Voice = require('@discordjs/voice');
 const ytdl = require("../node_modules/ytdl-core");
 
 module.exports = {
   name: "execute",
 
-  async execute(message, serverQueue, queue){
+  async execute(message, serverQueue, queue, client){
     const args = message.content.split(" ");
     
     const voiceChannel = message.member.voice.channel;
-    if (!voiceChannel) return ["Resopnd", "Get in a voice channel you bitch"];
+    if (!voiceChannel) return message.channel.send( "Get in a voice channel you bitch" );
 
     const permissions = voiceChannel.permissionsFor(message.client.user);
     if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) return message.channel.send( "I need the permissions to join and speak in your voice channel!" );
@@ -34,12 +35,19 @@ module.exports = {
       queueContruct.songs.push(song);
 
       try {
-        var connection = await voiceChannel.join();
-        play(message.guild, queueContruct.songs[0]);
+        // make connection
+        const connection = Voice.joinVoiceChannel({
+          channelId: voiceChannel.id,
+          guildId: voiceChannel.guild.id,
+          adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+        });
+
+        // play the song
+        client.commands.get("play").execute(voiceChannel.guild, queueContruct.songs[0], queue, client)
       } catch (err) {
         console.log(err);
         queue.delete(message.guild.id);
-        return message.channel.send("No");
+        return message.channel.send("Error playing song");
       }
     } 
     else {

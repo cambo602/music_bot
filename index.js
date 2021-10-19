@@ -47,7 +47,7 @@ client.once("disconnect", () => {
 // ---
 
 //Decides where all the messages will go, depending on the command
-client.on("message", message => {
+client.on("message", async message => {
   // console.log(message);
 
   if (message.author.bot) return;
@@ -56,10 +56,9 @@ client.on("message", message => {
   const serverQueue = queue.get(message.guild.id);
 
   let command = c => message.content.toLowerCase().startsWith(`${prefix}${c}`);
-  var result = null;
   
-  if (command("play") || command("p")) 
-    result = client.commands.get("execute").execute(message, serverQueue, queue, client);
+  if (command("play") || command("p"))
+    await client.commands.get("execute").execute(message, serverQueue, queue, client);
   else if (command("skip")) 
     skip(message, serverQueue);
   else if (command("stop")) 
@@ -67,11 +66,6 @@ client.on("message", message => {
   else if (command("queue")) 
     display(message, serverQueue);
   else message.channel.send("You need to enter a valid command!");
-
-  if (result[0] == "Respond"){
-    console.log("No")
-    return message.channel.send(result[1])
-  }
 });
 
 async function execute(message, serverQueue) {
