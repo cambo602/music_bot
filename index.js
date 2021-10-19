@@ -59,6 +59,8 @@ client.on("message", async (message) => {
 
   const serverQueue = queue.get(message.guild.id);
 
+  console.log(queue)
+
   const m = message.content.split(" ")[0].toLowerCase().replace(prefix, "");
 
   console.log(`pause? ${m == "pause"}`)

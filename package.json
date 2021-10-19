@@ -1,8 +1,8 @@
 {
   "name": "music_bot",
-  "version": "1.0.0",
-  "description": "It's a bot that plays music. Uses `discord.js`, `discord.js/voice`, `ytdl`, and `FFmpeg`",
-  "main": "index.js",
+  "version": "1.1.0",
+  "description": "bot that plays music",
+  "main": "musicbot.congif.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/akaowen7/music_bot.git"
   },
-  "author": "",
+  "author": "akaowen7",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/akaowen7/music_bot/issues"
@@ -18,8 +18,9 @@
   "homepage": "https://github.com/akaowen7/music_bot#readme",
   "dependencies": {
     "@discordjs/voice": "^0.6.0",
-    "discord.js": "^13.2.0",
+    "discord.js": "13.1.0",
     "libsodium-wrappers": "^0.7.9",
+    "node-abort-controller": "^3.0.1",
     "ytdl": "^1.4.1"
   }
 }
