@@ -1,15 +1,8 @@
 {
   "name": "music_bot",
-  "version": "1.0.1",
-  "description": "Discord bot that plays white people banggers",
+  "version": "1.0.0",
+  "description": "It's a bot that plays music. Uses `discord.js`, `discord.js/voice`, `ytdl`, and `FFmpeg`",
   "main": "index.js",
-  "dependencies": {
-    "@discordjs/opus": "^0.5.3",
-    "@discordjs/voice": "^0.6.0",
-    "discord.js": "^13.2.0",
-    "libsodium-wrappers": "^0.7.9",
-    "ytdl": "^1.4.1"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,10 +10,16 @@
     "type": "git",
     "url": "git+https://github.com/akaowen7/music_bot.git"
   },
-  "author": "cambo602, akaowen7",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/akaowen7/music_bot/issues"
   },
-  "homepage": "https://github.com/akaowen7/music_bot#readme"
+  "homepage": "https://github.com/akaowen7/music_bot#readme",
+  "dependencies": {
+    "@discordjs/voice": "^0.6.0",
+    "discord.js": "^13.2.0",
+    "libsodium-wrappers": "^0.7.9",
+    "ytdl": "^1.4.1"
+  }
 }

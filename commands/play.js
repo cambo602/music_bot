@@ -16,10 +16,13 @@ module.exports = {
     }
 
 		const player = Voice.createAudioPlayer();
+    const recource = Voice.createAudioResource(ytdl(song.url), {
+      inputType: Voice.StreamType.Arbitrary,
+    })
 
 		connection.subscribe(player)
 
-		player.play(ytdl(song.url))
+		player.play(recource)
 		player.on(Voice.AudioPlayerStatus.Idle, () => {
 			serverQueue.songs.shift();
 			client.commands.get("play").execute(voiceChannel.guild, queueContruct.songs[0], queue, client)
