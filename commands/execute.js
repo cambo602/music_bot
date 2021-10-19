@@ -1,6 +1,9 @@
 const Discord = require("../node_modules/discord.js");
 const Voice = require("@discordjs/voice");
 const ytdl = require("../node_modules/ytdl-core");
+const YouTube = require("discord-youtube-api");
+const { key } = require("../config.json");
+const youtube = new YouTube(key);
 const { NONAME } = require("dns");
 
 module.exports = {
@@ -30,7 +33,12 @@ module.exports = {
 
     // try url, then get url
     if (!ytdl.validateURL(args[1]))
-      return message.channel.send("You need to enter a valid url");
+
+      var video = await youtube.searchVideos(args.toString().replace('=p',''));
+      console.log(video.url);
+      console.log(typeof String(video.url));
+      args[1] = String(video.url);
+      
 
     const songInfo = await ytdl.getInfo(args[1]);
 
