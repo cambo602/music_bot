@@ -44,6 +44,6 @@ Run the bot with this command (in the bots directiory):
 - ok I added a player property to the queueContruct I swear they are diffrent
 
 ## Version changes 
-v1.2.0 - Reverted to node v14 for real this time. There is now a new entry point: `musicbot.congif.js`.
-v1.0.2 - bot functions
-v1.0.1 - bot is not functioning
+- v1.2.0 - Reverted to node v14 for real this time. There is now a new entry point: `musicbot.congif.js`.
+- v1.0.2 - bot functions
+- v1.0.1 - bot is not functioning
