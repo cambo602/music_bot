@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { prefix, token } = require("./config.json");
+const { prefix, token, key } = require("./config.json");
 const fs = require("fs");
 
 // Discord Has an new thing with intents, Not really sire how it works,
