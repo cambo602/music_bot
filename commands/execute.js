@@ -34,7 +34,7 @@ module.exports = {
 
       queueContruct.songs.push(song);
 
-      try {
+      // try {
         // make connection
         const connection = Voice.joinVoiceChannel({
           channelId: voiceChannel.id,
@@ -44,11 +44,11 @@ module.exports = {
 
         // play the song
         client.commands.get("play").execute(voiceChannel.guild, queueContruct.songs[0], queue, client)
-      } catch (err) {
-        console.log(err);
-        queue.delete(message.guild.id);
-        return message.channel.send("Error playing song");
-      }
+      // } catch (err) {
+      //   console.log(err);
+      //   queue.delete(message.guild.id);
+      //   return message.channel.send("Error playing song");
+      // }
     } 
     else {
       serverQueue.songs.push(song);
