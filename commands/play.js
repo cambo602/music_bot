@@ -1,4 +1,5 @@
 const Voice = require("@discordjs/voice");
+const Discord = require("discord.js");
 const ytdl = require("../node_modules/ytdl-core");
 
 module.exports = {
@@ -75,6 +76,13 @@ module.exports = {
     });
 
     // all has gone well?
-    serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+    const playEmbed = new Discord.MessageEmbed()
+      .setAuthor("Now Playing:")
+      .setTitle(song.title)
+      .setDescription(`Added by ${serverQueue.songs[0].person.username}`)
+      .setImage(serverQueue.songs[0].image)
+      .setColor("#0099ff")
+
+    serverQueue.textChannel.send({embeds: [playEmbed]});
   },
 };

@@ -16,7 +16,7 @@ const client = new Discord.Client({ intents: neededIntents });
 // Init the queue
 const queue = new Map();
 
-// |  This is a multifile command handler. We will be able to call a file by 
+// |  This is a multifile command handler. We will be able to call a file by
 // |  name and run it from anywhere
 // |
 // |  Discord.Collection() is basicaly just a cooller dict, and attaching it
@@ -83,9 +83,7 @@ client.on("message", async (message) => {
   // THIS IS WHERE THE MAGIC HAPPENS
   // we grab from our list of commands the file with the same name as whatever
   // the alisis dict tells us, and then runs the function "run" in the file
-  await client.commands
-    .get(alisis[m])
-    .run(message, serverQueue, queue, client);
+  await client.commands.get(alisis[m]).run(message, serverQueue, queue, client);
 });
 
 client.login(token);

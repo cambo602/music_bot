@@ -21,8 +21,6 @@ module.exports = {
     // pause it
     serverQueue.subscription.player.pause()
     serverQueue.playing = false;
-    return message.channel.send(
-      `Music paused. To unpause, send \`${prefix}play\``
-    );
+    return message.react("👍");
   },
 };

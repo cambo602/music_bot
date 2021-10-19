@@ -18,7 +18,7 @@ module.exports = {
     for (var i = 0; i < serverQueue.songs.length && i < 10; i++) {
       queueEmbed.addField(
         `${i + 1}. ${serverQueue.songs[i].title}`,
-        `Added by ${serverQueue.person.username}`,
+        `Added by ${serverQueue.songs[i].person.username}`,
         false
       );
     }

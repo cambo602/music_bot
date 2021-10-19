@@ -25,7 +25,7 @@ module.exports = {
     if (serverQueue && serverQueue.playing == false) {
       serverQueue.playing = true;
       serverQueue.subscription.player.unpause();
-      return message.channel.send("resumed");
+      return message.react("👍");
     }
 
     // try url, then get url
@@ -36,7 +36,11 @@ module.exports = {
 
     const song = {
       title: songInfo.videoDetails.title,
-      url: songInfo.videoDetails.video_url,
+      url: songInfo.videoDetails.video_url, 
+      // dosent work
+      image: songInfo.thumbnail_url,
+      // ---
+      person: message.author
     };
     // ---
 
@@ -50,7 +54,6 @@ module.exports = {
         // volume is never used
         volume: 5,
         playing: true,
-        person: message.author,
       };
 
       // add it to the big queue object that the bot has
