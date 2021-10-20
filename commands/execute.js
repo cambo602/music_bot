@@ -32,23 +32,22 @@ module.exports = {
     }
 
     // try url, then get url
-    if (!ytdl.validateURL(args[1]))
-
-      var video = await youtube.searchVideos(args.toString().replace('=p',''));
+    if (!ytdl.validateURL(args[1])) {
+      var video = await youtube.searchVideos(args.toString().replace("=p", ""));
       console.log(video.url);
       console.log(typeof String(video.url));
       args[1] = String(video.url);
-      
+    }
 
     const songInfo = await ytdl.getInfo(args[1]);
 
     const song = {
       title: songInfo.videoDetails.title,
-      url: songInfo.videoDetails.video_url, 
+      url: songInfo.videoDetails.video_url,
       // dosent work
       image: songInfo.thumbnail_url,
       // ---
-      person: message.author
+      person: message.author,
     };
     // ---
 
